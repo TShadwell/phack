@@ -1,5 +1,5 @@
-//Package persistant provides persistant storage.
-package persistant
+//Package persistent provides persistent storage.
+package persistent
 
 import (
 	"bytes"
@@ -7,7 +7,10 @@ import (
 	levigo "github.com/TShadwell/level/levigo"
 	"github.com/golang/glog"
 	"encoding/gob"
+	"errors"
 )
+
+var Inexistant = errors.New("persistent: Record does not exist");
 
 var (
 	level = levigo.Level
@@ -27,7 +30,7 @@ func Store(i interface{}, k []byte) (err error){
 	return database.Put(k, bt)
 }
 
-func Retrieve(i interface{}, k []byte) (err error) {
+func Retreive(i interface{}, k []byte) (err error) {
 	bt, err := database.Get(k)
 	if err != nil {
 		return
@@ -63,6 +66,9 @@ func gb(i interface{}) ([]byte, error) {
 }
 
 func ungob(i interface{}, b []byte) error {
+	if b == nil {
+		return Inexistant
+	}
 	return gob.NewDecoder(bytes.NewReader(b)).Decode(i)
 }
 

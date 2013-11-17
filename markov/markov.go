@@ -3,10 +3,12 @@ package markov
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"io"
 	"math/rand"
 	"strings"
+	"sync"
 )
 
 // Prefix is a Markov Chain prefix of one or more words.
@@ -25,16 +27,17 @@ func (p Prefix) Shift(word string) {
 
 type Chain struct {
 	Chain     map[string][]string
-	prefixLen int
+	PrefixLen int
+	mu sync.Mutex
 }
 
 func (c Chain) NewPrefix() Prefix {
-	return make(Prefix, c.prefixLen)
+	return make(Prefix, c.PrefixLen)
 }
 
-func NewChain(prefixLen int) (c *Chain) {
+func NewChain(PrefixLen int) (c *Chain) {
 	c = new(Chain)
-	c.prefixLen = prefixLen
+	c.PrefixLen = PrefixLen
 	c.Chain = make(map[string][]string)
 	return
 }
@@ -55,6 +58,24 @@ func (c *Chain) Load(r io.Reader) (err error) {
 		p.Shift(s)
 	}
 	return
+}
+
+// Write parses the bytes into prefixes and suffixes that are stored in Chain.
+func (c *Chain) Write(b []byte) (int, error) {
+	br := bytes.NewReader(b)
+	p := make(Prefix, c.PrefixLen)
+	for {
+		var s string
+		if _, err := fmt.Fscan(br, &s); err != nil {
+			break
+		}
+		key := p.String()
+		c.mu.Lock()
+		c.Chain[key] = append(c.Chain[key], s)
+		c.mu.Unlock()
+		p.Shift(s)
+	}
+	return len(b), nil
 }
 
 func (c *Chain) Generate(w io.Writer, n int) (err error) {

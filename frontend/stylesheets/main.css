@@ -1,0 +1,79 @@
+/* line 3, ../sass/main.scss */
+body {
+  background-color: #f2f2f2;
+  color: black;
+  font-family: "Open Sans", sans-serif;
+}
+
+/* line 8, ../sass/main.scss */
+h1, h2, h3 {
+  font-family: "Quattrocento", serif;
+  font-weight: normal;
+}
+
+/* line 13, ../sass/main.scss */
+h1 {
+  font-variant: small-caps;
+}
+
+/* line 17, ../sass/main.scss */
+h3 {
+  font-size: 1.9em;
+}
+
+/* line 22, ../sass/main.scss */
+main {
+  max-width: 60em;
+  margin: 0 auto 0 auto;
+}
+
+/* line 27, ../sass/main.scss */
+div:hover {
+  color: #007f7f;
+}
+
+/* line 31, ../sass/main.scss */
+figure > div {
+  float: left;
+  clear: none;
+  width: 48%;
+  cursor: pointer;
+}
+/* line 36, ../sass/main.scss */
+figure > div + div {
+  float: right;
+  clear: right;
+}
+
+/* line 42, ../sass/main.scss */
+figcaption {
+  display: block;
+  margin-top: 3em;
+  float: right;
+  width: 100%;
+}
+/* line 47, ../sass/main.scss */
+figcaption img {
+  margin: 0 2em 2em 0;
+  float: left;
+  clear: none;
+}
+
+/* line 56, ../sass/main.scss */
+p {
+  text-align: justify;
+  text-justify: inner-word;
+}
+/* line 59, ../sass/main.scss */
+p:first-letter {
+  margin-left: 2em;
+  font-size: 1.1em;
+}
+
+/* line 65, ../sass/main.scss */
+#next {
+  margin-top: 1em;
+  font-size: 3em;
+  padding: 0.2em;
+  cursor: pointer;
+}

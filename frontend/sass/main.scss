@@ -1,0 +1,70 @@
+//*{margin:0;}
+$fgc:black;
+body {
+	background-color:#f2f2f2;
+	color:$fgc;
+	font-family:"Open Sans", sans-serif;
+}
+h1, h2, h3 {
+	font-family:"Quattrocento", serif;
+	font-weight:normal;
+}
+
+h1 {
+	font-variant:small-caps;
+}
+
+h3 {
+	font-size:1.9em;
+}
+
+
+main {
+	max-width:60em;
+	margin:0 auto 0 auto;
+}
+
+div:hover{
+	color:mix($fgc, cyan);
+}
+figure {
+	>div{
+		float:left;
+		clear:none;
+		width:48%;
+		cursor:pointer;
+		& + div {
+			float:right;
+			clear:right;
+		}
+}
+	}
+	figcaption {
+		display:block;
+		margin-top:3em;
+		float:right;
+		width:100%;
+		img {
+			margin:0 2em 2em 0;
+			float:left;
+			clear:none;
+		}
+	}
+
+
+
+	p {
+		text-align:justify;
+		text-justify:inner-word;
+		&:first-letter{
+			margin-left:2em;
+			font-size:1.1em;
+		}
+}
+
+#next {
+	margin-top:1em;
+	font-size: 3em;
+	padding: 0.2em;
+	cursor:pointer;
+}
